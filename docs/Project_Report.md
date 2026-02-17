@@ -8,7 +8,8 @@ To detect, quantify, and analyze changes in forest cover over time using multi-t
 **Location**: West Singhbhum District, Jharkhand, India (Coordinates: 85.15°E, 22.10°N)
 **Select Area**: Approx. 700 km² buffer zone.
 
-*(Insert Map Screenshot Here: Show the yellow AOI boundary on the Google Satellite basemap)*
+<img width="1158" height="516" alt="image" src="https://github.com/user-attachments/assets/7ff2db58-2795-47d4-b87b-048f9b51ffdf" />
+
 
 ## 3. Data Used
 
@@ -37,7 +38,7 @@ var l5Col = ee.ImageCollection('LANDSAT/LT05/C02/T1_L2')
     .filterDate('1999-01-01', '2002-12-31')      // 2. Filter by Date
     .filter(ee.Filter.lt('CLOUD_COVER', 20));    // 3. Filter by Cloud Cover
 ```
-*(Optional: You can replace this code block with a screenshot of these lines from your GEE Code Editor)*
+
 
 ### Step 2: NDVI Calculation
 Calculated the Normalized Difference Vegetation Index (NDVI) for both time periods to quantify vegetation health.
@@ -49,7 +50,9 @@ Computed the difference between the recent and historical NDVI to identify chang
 **Formula**:  
 `NDVI_Change = NDVI_Recent - NDVI_Historical`
 
-*(Insert Screenshot: Code snippet for NDVI difference calculation)*
+```javascript
+var ndvi_diff = ndvi2023.subtract(ndvi2000).rename('NDVI_Change');
+```
 
 ### Step 4: AI-Based Classification
 Applied **Unsupervised Machine Learning (K-Means Clustering)** to segment the `NDVI_Change` map into 4 distinct classes:
@@ -62,13 +65,16 @@ Applied **Unsupervised Machine Learning (K-Means Clustering)** to segment the `N
 
 ### Maps
 1.  **NDVI Difference Map**:  
-    *(Insert Screenshot: The map with Red/Green/Yellow colors)*
+
     - **Red Areas**: Indicate vegetation loss.
     - **Green Areas**: Indicate vegetation gain.
     - **Yellow Areas**: Indicate stable forest.
 
+<img width="1362" height="773" alt="image" src="https://github.com/user-attachments/assets/c166dbbd-cb8c-438d-82e9-668f297b51d1" />
+
 2.  **Classified Change Zones**:  
-    *(Insert Screenshot: The map showing the 4 K-Means clusters)*
+<img width="1343" height="762" alt="image" src="https://github.com/user-attachments/assets/fb7c1d5a-535f-481e-b717-af47926280f4" />
+
 
 ### Area Statistics
 The AI analysis yielded the following area estimates for the change classes:
