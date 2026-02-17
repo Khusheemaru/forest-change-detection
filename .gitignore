@@ -1,0 +1,17 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignore large data files (if any strictly local ones exist)
+*.tif
+*.tiff
+*.zip
+*.shp
+*.shx
+*.dbf
+*.prj
+
+# Ignore local IDE settings
+.vscode/
+.idea/
